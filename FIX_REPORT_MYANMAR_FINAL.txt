@@ -1,0 +1,24 @@
+YouMeGame Loading 100% Loop - Final Fix Report
+
+စစ်ဆေးထားသောအချက်များ
+1. src/settings.03ed6.js ထဲက launchScene ကို LobbyMain အတိုင်းထားပြီး remoteBundles/subpackages ကို ပိတ်ထားပါတယ်။
+2. main.f76b9.js boot process ကို စစ်ပြီး launch scene တင်တဲ့ logic မှာ error မတွေ့ပါ။
+3. assets/main/index.73458.js ထဲမှာ HotUpdateMain / GameUpdate / LobbyNetWork ကို စစ်ခဲ့ပါတယ်။
+   - HotUpdateMain က preloadScene(window.hallName) ပြန်ခေါ်နိုင်ပါတယ်။
+   - GameUpdate / HotUpdate paths တွေက cc.game.restart() ခေါ်နိုင်ပါတယ်။
+   - Socket disconnect handlers တွေက Canvas/Loading.active=true ပြန်လုပ်နိုင်ပါတယ်။
+4. index.html က browser runtime state ကျန်နေတဲ့ splash 100% DOM ဖြစ်နေတဲ့ပုံစံကို clean index နဲ့ပြန်တင်ထားပါတယ်။
+
+ပြုပြင်ထားသောအချက်များ
+1. ym-offline-fallback.90loopfix.js ကို Final Guard v3 ထည့်ထားပါတယ်။
+2. HotUpdate / Loading / Update scene ပြန်ခေါ်တာတွေကို LobbyMain အဖြစ် redirect/ပိတ်ထားပါတယ်။
+3. LobbyMain ထဲရောက်ပြီးသားအချိန် LobbyMain ကိုထပ် load/preload မလုပ်အောင် guard ထည့်ထားပါတယ်။
+4. cc.game.restart() ကို offline package ထဲမှာ suppress လုပ်ထားပါတယ်။
+5. MockSocket.disconnect() က disconnect event မပစ်တော့အောင် ပြင်ထားပါတယ်။ ဒီ event ကြောင့် Canvas/Loading 100% ပြန်ပေါ်ပြီးရပ်နိုင်ပါတယ်။
+6. socket.io script နောက်မှ replace လုပ်ရင်တောင် local offline MockSocket ကိုပဲသုံးအောင် wrapper ထည့်ထားပါတယ်။
+7. LobbyMain scene ပေါ်ပြီး 100% Loading overlay ပြန်ပေါ်လာရင် startup window အတွင်း auto-hide လုပ်အောင် guard ထည့်ထားပါတယ်။
+8. assets/main/index.73458.js ထဲက socket disconnect နှစ်နေရာမှာ Canvas/Loading.active=true တိုက်ရိုက်လုပ်ထားတာကို offline-safe hide guard နဲ့ပြန်ပြင်ထားပါတယ်။
+
+အသုံးပြုရန်
+- ZIP ကိုဖြည်ပြီး mm.youmegame.com/index.html ကို browser/local web server မှာ run ပါ။
+- Browser cache/localStorage ကြောင့်ဟောင်းတဲ့ HotUpdateSearchPaths ကျန်နေရင် hard refresh လုပ်ပါ။

@@ -1,0 +1,15 @@
+{
+  "name": "offline-cocos-slot-demo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "User-supplied Cocos2d HTML5 game archive with a local offline demo fallback.",
+  "type": "module",
+  "scripts": {
+    "test": "node scripts/validate.mjs",
+    "build": "node scripts/build.mjs",
+    "serve": "node scripts/serve.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
