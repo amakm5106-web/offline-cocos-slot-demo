@@ -5,6 +5,12 @@ import { validateProject } from './validate.mjs';
 
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const outputRoot = path.join(projectRoot, 'dist');
+const publishFiles = new Set([
+  'assets', 'src', 'index', 'index.html', 'style-mobile.f044d.css',
+  'favicon.8de18.ico', 'splash.dd04a.png', 'main.f76b9.js',
+  'cocos2d-js-min.3af49.js', 'ym-offline-fallback.61327.js',
+  'ym-offline-fallback.90loopfix.js'
+]);
 
 function logValidation(label, result) {
   console.log(`${label}: ${result.files} files; ${result.bundles.length} bundles; ${result.games.length} playable games.`);
@@ -16,7 +22,7 @@ try {
   await fs.mkdir(outputRoot, { recursive: true });
   const entries = await fs.readdir(projectRoot, { withFileTypes: true });
   for (const entry of entries) {
-    if (['dist', '.git', 'node_modules'].includes(entry.name)) continue;
+    if (!publishFiles.has(entry.name)) continue;
     await fs.cp(path.join(projectRoot, entry.name), path.join(outputRoot, entry.name), { recursive: true });
   }
   logValidation('Build validation passed', validateProject(outputRoot));
