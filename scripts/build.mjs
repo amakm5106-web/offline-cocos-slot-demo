@@ -6,7 +6,7 @@ import { validateProject } from './validate.mjs';
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const outputRoot = path.join(projectRoot, 'dist');
 const publishFiles = new Set([
-  'assets', 'src', 'index', 'index.html', 'style-mobile.f044d.css',
+  'assets', 'src', 'index.html', 'style-mobile.f044d.css',
   'favicon.8de18.ico', 'splash.dd04a.png', 'main.f76b9.js',
   'cocos2d-js-min.3af49.js', 'ym-offline-fallback.61327.js',
   'ym-offline-fallback.90loopfix.js'
